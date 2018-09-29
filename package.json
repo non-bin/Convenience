@@ -1,0 +1,22 @@
+{
+  "name": "convenience",
+  "version": "0.1.0",
+  "description": "A customisable menu system, for your convenience",
+  "main": "convenience/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/non-bin/Convenience.git"
+  },
+  "keywords": [
+    "convenience"
+  ],
+  "author": "Alice Jacka",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/non-bin/Convenience/issues"
+  },
+  "homepage": "https://github.com/non-bin/Convenience#readme"
+}
