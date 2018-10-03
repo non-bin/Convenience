@@ -1,6 +1,7 @@
 // require statments
 const config = require('./config.js');
-const chalk = require('chalk');
+const chalk  = require('chalk');
+var   spawn  = require('child_process').spawn;
 
 // variable definitions
 var path = [];
@@ -39,7 +40,8 @@ stdin.on('data', function(key){
     }
 
     if (menu.items === undefined) {
-
+        clear();
+        runCommand(menu.action);
     } else {
         displayMenu(menu);
     }
@@ -82,4 +84,12 @@ function clear() {
 
     // then return to the top
     stdout.cursorTo(0, 0);
+}
+
+function runCommand(action) {
+    command = spawn(action.command, action.params, { stdio: 'inherit' });
+
+    command.on('exit', function (code) {
+        process.exit(code);
+    });
 }
