@@ -1,0 +1,23 @@
+{
+    "title": "Convenience :)",
+    "items": {
+        "v": {
+            "title": "vim in the local dir",
+            "action": {
+                "command": "vim",
+                "params": [
+                    "./"
+                ]
+            }
+        },
+        "t": {
+            "title": "test",
+            "action": {
+                "command": "vim",
+                "params": [
+                    "test"
+                ]
+            }
+        }
+    }
+}
