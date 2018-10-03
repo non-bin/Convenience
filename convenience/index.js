@@ -1,7 +1,7 @@
 // require statments
 const config = require('./config.js');
 const chalk  = require('chalk');
-var   spawn  = require('child_process').spawn;
+const spawn  = require('child_process').spawn;
 
 // variable definitions
 var path = [];
@@ -39,11 +39,18 @@ stdin.on('data', function(key){
         menu = menu.items[path[i]];
     }
 
-    if (menu.items === undefined) {
-        clear();
-        runCommand(menu.action);
+    if (menu === undefined) {
+        path.pop();
+        stdout.cursorTo(0);
+        stdout.clearLine();
+        stdout.write(chalk.red('Key "' + key + '" has no mapping!'));
     } else {
-        displayMenu(menu);
+        if (menu.items === undefined) {
+            clear();
+            runCommand(menu.action);
+        } else {
+            displayMenu(menu);
+        }
     }
 });
 
@@ -63,6 +70,8 @@ function displayMenu(menu) {
             stdout.write(chalk.blue(key + ' - ' + item.title + '\n'));
         }
     }
+
+    stdout.write('\n');
 }
 
 function createCanvas() {
