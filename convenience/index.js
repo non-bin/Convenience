@@ -1,7 +1,7 @@
 // require statments
-const chalk  = require('chalk');
-const spawn  = require('child_process').spawn;
-const fs     = require('fs');
+const chalk    = require('chalk');
+const execSync = require('child_process').execSync;
+const fs       = require('fs');
 
 // import the config file
 var config = JSON.parse(fs.readFileSync('./config.json', 'utf8'));
@@ -99,9 +99,7 @@ function clear() {
 }
 
 function runCommand(action) {
-    command = spawn(action.command, action.params, { stdio: 'inherit' });
-
-    command.on('exit', function (code) {
-        process.exit(code);
-    });
+    fs.writeFileSync('/tmp/convenience.sh', action);
+    execSync('chmod +x /tmp/convenience.sh');
+    process.exit();
 }
