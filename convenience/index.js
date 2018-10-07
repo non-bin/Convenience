@@ -67,10 +67,10 @@ function displayMenu(menu) {
 
         if (item.items === undefined) {
             // this item is an action
-            stdout.write(chalk.yellow(key + ' - ' + item.title + '\n'));
+            stdout.write(chalk.yellow(' ' + key + ' * ' + item.title + '\n'));
         } else {
             // this item is a dir
-            stdout.write(chalk.blue(key + ' - ' + item.title + '\n'));
+            stdout.write(chalk.blue(' ' + key + ' > ' + item.title + '\n'));
         }
     }
 
