@@ -4,6 +4,14 @@
 
 Convenience is a customisable menu system, for your convenience.
 
+## But How Do?
+
+Add an alias to conveience/convenience.sh by adding something like
+
+    alias c="~/Convenience/conveience/convenience.sh"
+
+to your .bashrc or similar, then start building your config file
+
 ## Lisence
 
     Convenience. A customisable menu system, for your convenience
