@@ -29,7 +29,7 @@ displayMenu(menu);
 stdin.on('data', function(key){
     if (key === '\u0003') {
         // ctrl-c (end of text)
-        process.exit();
+        process.exit(130);
     } else if (key === '') {
         // backspace (back one menu)
         path.pop();
@@ -100,6 +100,5 @@ function clear() {
 
 function runCommand(action) {
     fs.writeFileSync('/tmp/convenience.sh', action);
-    execSync('chmod +x /tmp/convenience.sh');
-    process.exit();
+    process.exit(0);
 }
