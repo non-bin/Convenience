@@ -19,11 +19,7 @@ stdin.setEncoding('utf8');
 // create a space to write the menu items
 createCanvas();
 
-var menu = config;
-displayMenu(menu);
-
-// console.log(JSON.stringify(menu));
-// console.log();
+displayMenu(config);
 
 // on any data into stdin
 stdin.on('data', function(key){
