@@ -1,7 +1,6 @@
 // require statments
-const chalk    = require('chalk');
-const execSync = require('child_process').execSync;
-const fs       = require('fs');
+const chalk = require('chalk');
+const fs    = require('fs');
 
 // import the config file
 var config = JSON.parse(fs.readFileSync('./config.json', 'utf8'));
