@@ -25,8 +25,9 @@ stdin.on('data', function(key){
     if (key === '\u0003') {
         // ctrl-c (end of text)
         process.exit(130);
-    } else if (key === '') {
-        // backspace (back one menu)
+    } else if (key === '' || key === '') {
+        //     backspace      esc
+        // (back one menu)
         path.pop();
     } else {
         path.push(key);
