@@ -3,7 +3,7 @@ const chalk = require('chalk');
 const fs    = require('fs');
 
 // import the config file
-var config = JSON.parse(fs.readFileSync('./config.json', 'utf8'));
+const config = JSON.parse(fs.readFileSync(__dirname + '/config.json', 'utf8'));
 
 // variable definitions
 var path = [];
