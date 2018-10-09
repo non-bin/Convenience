@@ -5,5 +5,5 @@
 if node ~/repos/Convenience/convenience/index.js
 then
     chmod +x /tmp/convenience.sh
-    /tmp/convenience.sh
+    . /tmp/convenience.sh
 fi
