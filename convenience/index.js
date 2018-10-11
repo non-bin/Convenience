@@ -1,9 +1,33 @@
 // require statments
-const chalk = require('chalk');
-const fs    = require('fs');
+const fs = require('fs');
+
+var options = {
+    color: true,
+}
 
 // parse any args passed
 parseArgv(process.argv);
+
+// set colors
+var colors = {};
+
+if (options.color) {
+    colors = {
+        red   : '\u001b[31m',
+        yellow: '\u001b[33m',
+        blue  : '\u001b[34m',
+        reset : '\u001b[39m'
+    };
+} else {
+    colors = {
+        red   : '',
+        yellow: '',
+        blue  : '',
+        reset : ''
+    };
+}
+
+// console.log(process.argv);
 
 // import the config file
 const config = JSON.parse(fs.readFileSync(__dirname + '/config.json', 'utf8'));
@@ -45,7 +69,7 @@ stdin.on('data', function(key){
         path.pop();
         stdout.cursorTo(0);
         stdout.clearLine();
-        stdout.write(chalk.red('Key "' + key + '" has no mapping!'));
+        stdout.write(colors.red + 'Key "' + key + '" has no mapping!' + colors.reset);
     } else {
         if (menu.items === undefined) {
             clear();
@@ -66,10 +90,10 @@ function displayMenu(menu) {
 
         if (item.items === undefined) {
             // this item is an action
-            stdout.write(chalk.yellow(' ' + key + ' * ' + item.title + '\n'));
+            stdout.write(colors.yellow + ' ' + key + ' * ' + item.title + '\n' + colors.reset);
         } else {
             // this item is a dir
-            stdout.write(chalk.blue(' ' + key + ' > ' + item.title + '\n'));
+            stdout.write(colors.blue + ' ' + key + ' > ' + item.title + '\n' + colors.reset);
         }
     }
 
@@ -119,6 +143,10 @@ function parseArgv(argv) {
 
         if (arg.slice(0, 2) === '--') { // is it a longhand arg?
             switch (arg.slice(2)) {
+                case 'colorless':
+                    options.color = false;
+                    break;
+
                 default:
                     unknownArg(arg);
                     break;
