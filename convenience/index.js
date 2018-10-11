@@ -144,6 +144,14 @@ function parseArgv(argv) {
 
         if (arg.slice(0, 2) === '--') { // is it a longhand arg?
             switch (arg.slice(2)) {
+                case 'license':
+                    license();
+                    break;
+
+                case 'help':
+                    help();
+                    break;
+
                 case 'colorless':
                     options.color = false;
                     break;
@@ -157,6 +165,15 @@ function parseArgv(argv) {
                 const subArg = arg.slice(1)[j];
 
                 switch (subArg) {
+                    case 'l':
+                        license();
+                        break;
+
+                    case 'h':
+                    case '?':
+                        help();
+                        break;
+
                     case 'c':
                         options.configPath = argv[i+1];
                         i++; // don't attempt to parse the new config path as a param
@@ -171,6 +188,27 @@ function parseArgv(argv) {
     }
 }
 
+function help() {
+    console.log(`Usage: c [options] [command]
+
+Convenience  Copyright (C) 2018  Alice Jacka
+v0.1.0
+
+Command:
+    command is a string or characters that convenience will use as
+    a path to navigate to the corosponding directory, or perform the
+    corosponding action
+
+Options:
+    -l, --license           Show the license information
+    -h, -?, --help          Display this help page
+    -c [path_to_config]     Specify an alternate config file
+    --colorless             Run without console colors
+
+More info, source, and issues can be found at https://git.io/fxcjE`);
+process.exit(1); // exit non 0 so the tmpfile wont be executed
+}
+
 function unknownArg(arg) {
     console.log(`Bad option: ${arg}
 
@@ -180,5 +218,28 @@ v0.1.0
 
 Usage: convenience [options] [command]
 Help:  convenience -h`);
+    process.exit(1); // exit non 0 so the tmpfile wont be executed
+}
+
+function license() {
+    console.log(`Convenience v0.1.0
+
+Convenience. A customisable menu system, for your convenience
+https://github.com/non-bin/Convenience
+Copyright (C) 2018  Alice Jacka  alice@jacka.net.au
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+`);
     process.exit(1); // exit non 0 so the tmpfile wont be executed
 }

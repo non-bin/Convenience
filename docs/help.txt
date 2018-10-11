@@ -1,0 +1,12 @@
+Usage: convenience [options] [command]
+
+Convenience. A customisable menu system, for your convenience
+
+Command:
+  command is a string or characters that convenience will use as a path to navigate to the corosponding directory, or perform the corosponding action
+
+Options:
+  -l, --license           Show the license information
+  -h, -?, --help          Display this help page
+  -c [path_to_config]     Specify an alternate config file
+  --colorless             Run without console colors
