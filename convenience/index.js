@@ -2,6 +2,9 @@
 const chalk = require('chalk');
 const fs    = require('fs');
 
+// parse any args passed
+parseArgv(process.argv);
+
 // import the config file
 const config = JSON.parse(fs.readFileSync(__dirname + '/config.json', 'utf8'));
 
@@ -97,4 +100,51 @@ function clear() {
 function runCommand(action) {
     fs.writeFileSync('/tmp/convenience.sh', action);
     process.exit(0);
+}
+
+function parseArgv(argv) {
+    var start;
+
+    // find the first item we are interested in
+    for (let i = 0; i < argv.length; i++) {
+        if (argv[i] === __filename) {
+            start = i+1;
+            break;
+        }
+    }
+
+    // run through what's left
+    for (let i = 0; i < argv.length; i++) {
+        var arg = argv[i];
+
+        if (arg.slice(0, 2) === '--') { // is it a longhand arg?
+            switch (arg.slice(2)) {
+                default:
+                    unknownArg(arg);
+                    break;
+            }
+        } else if (arg.slice(0, 1) === '-') { // is it a shorthand one?
+            for (let j = 0; j < arg.slice(1).length; j++) {
+                const subArg = arg.slice(1)[j];
+
+                switch (subArg) {
+                    default:
+                        unknownArg(arg);
+                        break;
+                }
+            }
+        }
+    }
+}
+
+function unknownArg(arg) {
+    console.log(`Bad option: ${arg}
+
+Convenience  Copyright (C) 2018  Alice Jacka
+https://git.io/fxcjE
+v0.1.0
+
+Usage: convenience [options] [command]
+Help:  convenience -h`);
+    process.exit(1); // exit non 0 so the tmpfile wont be executed
 }
