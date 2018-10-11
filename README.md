@@ -14,6 +14,7 @@ to your .bashrc or similar, then start building your config file
 
 ## Lisence
 
+    https://github.com/non-bin/Convenience
     Convenience. A customisable menu system, for your convenience
     Copyright (C) 2018  Alice Jacka  alice@jacka.net.au
 
