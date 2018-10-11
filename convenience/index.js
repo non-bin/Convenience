@@ -3,6 +3,7 @@ const fs = require('fs');
 
 var options = {
     color: true,
+    configPath: __dirname + '/config.json'
 }
 
 // parse any args passed
@@ -30,7 +31,7 @@ if (options.color) {
 // console.log(process.argv);
 
 // import the config file
-const config = JSON.parse(fs.readFileSync(__dirname + '/config.json', 'utf8'));
+const config = JSON.parse(fs.readFileSync(options.configPath, 'utf8'));
 
 // variable definitions
 var path = [];
@@ -156,6 +157,11 @@ function parseArgv(argv) {
                 const subArg = arg.slice(1)[j];
 
                 switch (subArg) {
+                    case 'c':
+                        options.configPath = argv[i+1];
+                        i++; // don't attempt to parse the new config path as a param
+                        break;
+
                     default:
                         unknownArg(arg);
                         break;
