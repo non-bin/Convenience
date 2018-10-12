@@ -186,7 +186,7 @@ function help() {
     console.log(`Usage: c [options] [command]
 
 Convenience  Copyright (C) 2018  Alice Jacka
-v0.1.0
+v1.0.0
 
 Command:
     command is a string or characters that convenience will use as
@@ -208,7 +208,7 @@ function unknownArg(arg) {
 
 Convenience  Copyright (C) 2018  Alice Jacka
 https://git.io/fxcjE
-v0.1.0
+v1.0.0
 
 Usage: convenience [options] [command]
 Help:  convenience -h`);
@@ -216,7 +216,7 @@ Help:  convenience -h`);
 }
 
 function license() {
-    console.log(`Convenience v0.1.0
+    console.log(`Convenience v1.0.0
 
 Convenience. A customisable menu system, for your convenience
 https://github.com/non-bin/Convenience

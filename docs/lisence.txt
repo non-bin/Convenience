@@ -1,4 +1,4 @@
-Convenience v0.1.0
+Convenience v1.0.0
 
 Convenience. A customisable menu system, for your convenience
 https://github.com/non-bin/Convenience

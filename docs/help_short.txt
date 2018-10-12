@@ -2,7 +2,7 @@ Bad option: [option]
 
 Convenience  Copyright (C) 2018  Alice Jacka
 https://git.io/fxcjE
-v0.1.0
+v1.0.0
 
 Usage: convenience [options] [command]
 Help:  convenience -h
