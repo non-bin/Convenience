@@ -46,40 +46,49 @@ stdin.setEncoding('utf8');
 // create a space to write the menu items
 createCanvas();
 
-displayMenu(config);
+if (preloadKeys) {
+    respondToInput(preloadKeys);
+} else {
+    displayMenu(config);
+}
 
 // on any data into stdin
-stdin.on('data', function(key){
-    if (key === '\u0003') {
-        // ctrl-c (end of text)
-        process.exit(130);
-    } else if (key === '' || key === '') {
-        //     backspace      esc
-        // (back one menu)
-        path.pop();
-    } else {
-        path.push(key);
-    }
+stdin.on('data', function(keys) { respondToInput(keys) });
 
-    var menu = config;
-    for (let i = 0; i < path.length; i++) {
-        menu = menu.items[path[i]];
-    }
-
-    if (menu === undefined) {
-        path.pop();
-        stdout.cursorTo(0);
-        stdout.clearLine();
-        stdout.write(colors.red + 'Key "' + key + '" has no mapping!' + colors.reset);
-    } else {
-        if (menu.items === undefined) {
-            clear();
-            runCommand(menu.action);
+function respondToInput(keys) {
+    for (let i = 0; i < keys.length; i++) {
+        const key = keys[i];
+        if (key === '\u0003') {
+            // ctrl-c (end of text)
+            process.exit(130);
+        } else if (key === '' || key === '') {
+            //     backspace      esc
+            // (back one menu)
+            path.pop();
         } else {
-            displayMenu(menu);
+            path.push(key);
+        }
+
+        var menu = config;
+        for (let i = 0; i < path.length; i++) {
+            menu = menu.items[path[i]];
+        }
+
+        if (menu === undefined) {
+            path.pop();
+            stdout.cursorTo(0);
+            stdout.clearLine();
+            stdout.write(colors.red + 'Key "' + key + '" has no mapping!' + colors.reset);
+        } else {
+            if (menu.items === undefined) {
+                clear();
+                runCommand(menu.action);
+            } else {
+                displayMenu(menu);
+            }
         }
     }
-});
+}
 
 function displayMenu(menu) {
     clear();
@@ -130,10 +139,10 @@ function runCommand(action) {
 function parseArgv(argv) {
     for (const arg in argv) {
         if (argv.hasOwnProperty(arg)) {
-    // find the first item we are interested in
-    for (let i = 0; i < argv.length; i++) {
-        if (argv[i] === __filename) {
-    }
+            if (arg === '_') {
+                preloadKeys = argv._.join(' ');
+                continue;
+            }
 
             switch (arg) {
                 case 'license':
@@ -148,33 +157,22 @@ function parseArgv(argv) {
                     options.color = false;
                     break;
 
+                case 'l':
+                    license();
+                    break;
+
+                case 'h':
+                case '?':
+                    help();
+                    break;
+
+                case 'c':
+                    options.configPath = argv[arg];
+                    break;
+
                 default:
                     unknownArg(arg);
                     break;
-            }
-        } else if (arg.slice(0, 1) === '-') { // is it a shorthand one?
-            for (let j = 0; j < arg.slice(1).length; j++) {
-                const subArg = arg.slice(1)[j];
-
-                switch (subArg) {
-                    case 'l':
-                        license();
-                        break;
-
-                    case 'h':
-                    case '?':
-                        help();
-                        break;
-
-                    case 'c':
-                        options.configPath = argv[i+1];
-                        i++; // don't attempt to parse the new config path as a param
-                        break;
-
-                    default:
-                        unknownArg(arg);
-                        break;
-                }
             }
         }
     }
