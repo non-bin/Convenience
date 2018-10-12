@@ -1,13 +1,15 @@
 // require statments
-const fs = require('fs');
+const fs   = require('fs');
+const argv = require('minimist')(process.argv.slice(2), { boolean: true });
 
+var preloadKeys = false;
 var options = {
     color: true,
     configPath: __dirname + '/config.json'
 }
 
 // parse any args passed
-parseArgv(process.argv);
+parseArgv(argv);
 
 // set colors
 var colors = {};
@@ -27,8 +29,6 @@ if (options.color) {
         reset : ''
     };
 }
-
-// console.log(process.argv);
 
 // import the config file
 const config = JSON.parse(fs.readFileSync(options.configPath, 'utf8'));
@@ -128,22 +128,14 @@ function runCommand(action) {
 }
 
 function parseArgv(argv) {
-    var start;
-
+    for (const arg in argv) {
+        if (argv.hasOwnProperty(arg)) {
     // find the first item we are interested in
     for (let i = 0; i < argv.length; i++) {
         if (argv[i] === __filename) {
-            start = i+1;
-            break;
-        }
     }
 
-    // run through what's left
-    for (let i = 0; i < argv.length; i++) {
-        var arg = argv[i];
-
-        if (arg.slice(0, 2) === '--') { // is it a longhand arg?
-            switch (arg.slice(2)) {
+            switch (arg) {
                 case 'license':
                     license();
                     break;
