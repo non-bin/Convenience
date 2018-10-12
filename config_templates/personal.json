@@ -1,0 +1,65 @@
+{
+    "title": "Convenience :)",
+    "items": {
+        "v": {
+            "title": "vim ./",
+            "action": "vim ./"
+        },
+        "h": {
+            "title": "htop",
+            "action": "htop"
+        },
+        "f": {
+            "title": "Full Bright",
+            "action": "fullBright"
+        },
+        "z": {
+            "title": "Fix Stuff",
+            "items": {
+                "w": {
+                    "title": "Fix The Wifi",
+                    "action": "cd /home/alice/repos/backport-iwlwifi/ && sudo make install"
+                }
+            }
+        },
+        "g": {
+            "title": "Goto",
+            "items": {
+                "r": {
+                    "title": "Repos",
+                    "items":{
+                        "r": {
+                            "title": "Repos",
+                            "action": "cd /home/alice/repos/"
+                        },
+                        "c": {
+                            "title": "Convenience",
+                            "action": "cd /home/alice/repos/Convenience/"
+                        }
+                    }
+                }
+            }
+        },
+
+
+
+
+        "`": {
+            "title": "Tests",
+            "items": {
+                "v": {
+                    "title": "vim test",
+                    "action": "vim test"
+                },
+                "t": {
+                    "title": "test",
+                    "action": "echo 'test'"
+                },
+                "d": {
+                    "title": "Directory",
+                    "items": {}
+                }
+            }
+        }
+    }
+}
