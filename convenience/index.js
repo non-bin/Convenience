@@ -16,17 +16,19 @@ var colors = {};
 
 if (options.color) {
     colors = {
-        red   : '\u001b[31m',
-        yellow: '\u001b[33m',
-        blue  : '\u001b[34m',
-        reset : '\u001b[39m'
+        error    : '\u001b[31m',
+        action   : '\u001b[33m',
+        directory: '\u001b[34m',
+        comment  : '\u001b[37m',
+        reset    : '\u001b[39m'
     };
 } else {
     colors = {
-        red   : '',
-        yellow: '',
-        blue  : '',
-        reset : ''
+        error    : '',
+        action   : '',
+        directory: '',
+        comment  : '',
+        reset    : ''
     };
 }
 
@@ -78,7 +80,7 @@ function respondToInput(keys) {
             path.pop();
             stdout.cursorTo(0);
             stdout.clearLine();
-            stdout.write(colors.red + 'Key "' + key + '" has no mapping!' + colors.reset);
+            stdout.write(colors.error + 'Key "' + key + '" has no mapping!' + colors.reset);
         } else {
             if (menu.items === undefined) {
                 clear();
@@ -98,12 +100,14 @@ function displayMenu(menu) {
     for (const key in menu.items) {
         const item = menu.items[key];
 
-        if (item.items === undefined) {
+        if (key === '_comment') {
+            stdout.write(colors.comment + '     ' + item + '\n' + colors.reset);
+        } else if (item.items === undefined) {
             // this item is an action
-            stdout.write(colors.yellow + ' ' + key + ' * ' + item.title + '\n' + colors.reset);
+            stdout.write(colors.action + ' ' + key + ' * ' + item.title + '\n' + colors.reset);
         } else {
             // this item is a dir
-            stdout.write(colors.blue + ' ' + key + ' > ' + item.title + '\n' + colors.reset);
+            stdout.write(colors.directory + ' ' + key + ' > ' + item.title + '\n' + colors.reset);
         }
     }
 
