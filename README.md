@@ -12,30 +12,6 @@ Add an alias to conveience/convenience.sh by adding something like
 
 to your .bashrc or similar, then start building your config file
 
-## Known Issues
-
-### Alias Problem In Zsh
-
-Aliases defined with the `alias` command in zsh, produce a weird issue where if an alias is given as a parameter, the alias is resolved. Here's an example
-
-    // .zshrc
-    alias c=". /path/to/convenience.sh "
-    alias a="bad-thing"
-
-    // zsh
-    #> c a
-    'bad-thing' is fed to convenience instead of 'a'
-
-This can be prevented by using a function definition instead of an alias, have another example
-
-    // .zshrc
-    c() {
-        . /path/to/convenience.sh "$@"
-    }
-
-The `"$@"` is important (including the `"`s) to actually pass the params through
-
-
 ## Lisence
 
     https://github.com/non-bin/Convenience
